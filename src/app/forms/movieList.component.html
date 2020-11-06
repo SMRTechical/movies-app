@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form (submit)="onSearch()" #theForm="ngForm" novalidate>
+                    <div class="input-group mb-3 mt-3">
+                        <input type="text" name="moveName" [(ngModel)]="params.movieName" #movieName="ngModel" required class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit">
+                  <span *ngIf="data.loading" class="spinner-border spinner-border-sm mr-1"></span>
+                  <span *ngIf="!data.loading" >Search</span>
+                  </button>
+                            <span class="text-danger ml-3" *ngIf="movieName.touched && movieName.invalid && movieName.errors.required">required!</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row col-md-6 offset-md-3" *ngIf="data.error">
+                <div class="card text-white bg-danger mb-3 width100">
+                    <div class="card-header"><span class="glyphicon glyphicon-remove"></span>Oops</div>
+                    <div class="card-body">
+                        <h5 class="card-title">There was a problem</h5>
+                        <p class="card-text">{{data.error}}.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row col-md-6 offset-md-3" *ngIf="data.initialising">
+                <div class="spinner-grow text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-grow text-secondary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-grow text-success" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-grow text-danger" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-grow text-warning" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-grow text-info" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-grow text-light" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-grow text-dark" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <h3 class="mr-3">
+                    ...Loading
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="!data.error">
+    <div class="col-md-3" *ngFor="let m of movieList">
+        <div class="card h-100 mb-3" style="width:100%">
+            <div class="card-header movie-header">
+                <span class="card-title">{{m.Title}}</span>
+                <a href="#" class="float-right" (click)="onClick(m)">
+                    <span>...More</span>
+                </a>
+            </div>
+            <div [ngSwitch]="m.Poster === 'N/A' || m.Poster !== 'N/A'">
+                <img class="img-responsive card-img-top" *ngSwitchCase="m.Poster !== 'N/A'" src="{{m.Poster}}">
+                <img class="img-responsive card-img-top" *ngSwitchCase="m.Poster === 'N/A'" src="http://www.novelupdates.com/img/noimagefound.jpg">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="!data.error && movieList.length > 0">
+    <ul class="pagination pagination-md justify-content-center flex-wrap" style="margin:20px 0;cursor:pointer">
+        <li *ngFor='let in of counter(data.totalPages) ;let i = index' class="page-item"><a class="page-link" (click)="onPageChange(i+1)">{{i+1}}</a></li>
+    </ul>
+</div>

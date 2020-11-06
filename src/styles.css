@@ -1,0 +1,63 @@
+/* You can add global styles to this file, and also import other style files */
+body, html {
+    height: 100%;
+  }
+  
+.bg {
+  background-color: #CDCDCD; 
+  }
+
+  .width100{
+      width:100%;
+  }
+
+  .movie-header{
+      color:#fff;
+    background: linear-gradient(to left, rgba(85, 67, 70, 0.85), rgba(69, 80, 91, 0.85)) !important;
+    -webkit-transition: 0.2s background ease-in-out;
+    transition: 0.2s background ease-in-out;
+  }
+
+  .movie-header>a{
+      color:	#FFCACA;
+      font-weight:bolder;
+      text-decoration: none;
+  }
+
+ 
+
+    .overlay {
+      
+        opacity: 0.4;
+     }
+
+ a{
+     color:#fff;
+     text-decoration: none;
+    }
+
+ a:hover{
+     color:#fff;
+     text-decoration: none;;
+ }
+
+
+ /* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+
+    .card-img-overlay{
+        flex: 1 1 auto;
+        min-height: 1px;
+        padding: 1.25rem;
+        position: relative;
+    }
+}
+/*
+Small devices (portrait tablets and large phones, 600px and up)
+@media only screen and (min-width: 600px) {
+    #img-contact{
+        display:none;
+    }
+}
+*/

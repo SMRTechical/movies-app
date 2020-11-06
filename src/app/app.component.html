@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>DutchApp</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+</head> 
+<body class="bg">
+    <!-- <nav class="navbar navbar-dark bg-dark">
+       
+            <a class="navbar-brand" href="#">
+                <img src="assets/logo.jpg" width="40" height="25" >
+              </a>
+        
+
+
+
+      </nav> -->
+
+      <header>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md navbar-dark  bg-dark">
+        <a href="#" class="navbar-brand">Omdb Movies</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button> 
+    
+         <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a  routerLink="/"  class="nav-item nav-link active">Home</a>
+                <a routerLink="/about" class="nav-item nav-link">About</a>
+                <a routerLink="/contact" class="nav-item nav-link">Contact</a>
+            </div>
+            <!-- <form class="form-inline ml-auto">
+                <input type="text" class="form-control mr-sm-2" placeholder="Search">
+                <button type="submit" class="btn btn-outline-light">Search</button>
+            </form> -->
+        </div>
+    </nav>
+</header>
+<main role="main" class="container-fluid">
+
+        <router-outlet></router-outlet>
+    </main>
+<!-- <footer class="footer">
+    <div class="container">
+      <span class="text-muted">Place sticky footer content here.</span>
+    </div>
+  </footer> -->
+</body>
+</html>

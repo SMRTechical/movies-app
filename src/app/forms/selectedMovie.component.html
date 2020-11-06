@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col">
+        <div class="card mb-3" style="">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <div [ngSwitch]="movie.Poster === 'N/A' || movie.Poster !== 'N/A'">
+                        <img class="img-responsive" *ngSwitchCase="movie.Poster !== 'N/A'" src="{{movie.Poster}}" class="card-img" [alt]="movie.Title">
+                        <img class="img-responsive" *ngSwitchCase="movie.Poster === 'N/A'" class="card-img" alt="[movie.Title]" src="http://www.novelupdates.com/img/noimagefound.jpg">
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{movie.Title}}</h5>
+                        <p class="card-text">{{movie.Plot}}</p>
+                        <p class="card-text"><small class="text-muted"><strong class="mr-1">Released:</strong>{{movie.Released}}</small></p>
+                        <p class="card-text"><small class="text-muted"><strong class="mr-1">Awards:</strong>{{movie.Awards}}</small></p>
+                        <p class="card-text"><small class="text-muted"><strong class="mr-1">Production:</strong>{{movie.Production}}</small></p>
+                        <p class="card-text"><small class="text-muted"><strong class="mr-1">Actors:</strong>{{movie.Actors}}</small></p>
+                        <p class="card-text"><small class="text-muted"><strong class="mr-1">Country:</strong>{{movie.Country}}</small></p>
+                        <p class="card-text"><small class="text-muted"><strong class="mr-1">Director:</strong>{{movie.Director}}</small></p>
+                        <p class="card-text"><small class="text-muted"><strong class="mr-1">Writer:</strong>{{movie.Writer}}</small></p>
+                        <p class="card-text"><small class="text-muted"><strong class="mr-1">Genre:</strong>{{movie.Genre}}</small></p>
+                        <p class="card-text"><small class="text-muted"><strong class="mr-1">Language:</strong>{{movie.Language}}</small></p>
+                        <p class="card-text"><small class="text-muted"><strong class="mr-1">Released:</strong>{{movie.Released}}</small></p>
+                        <div *ngIf="movie.Ratings.length > 0">
+                            <ul *ngFor="let r of movie.Ratings">
+                                <li><small class="text-muted"><strong class="mr-1">{{r.Source}}:</strong>{{r.Value}}</small></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
