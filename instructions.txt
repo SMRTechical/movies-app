@@ -1,0 +1,31 @@
+cmd
+npm --version
+npm update npm
+npm install @angular/cli -g 
+browser to directory cmd
+ng new footbal-app --dryRun --skip-git --inline-template --inline-style 
+ng new footbal-app --skip-git --inline-template --inline-style
+browser to directory cmd 
+ng server
+npm install bootstrap
+npm install jquery
+
+angular.json:
+"styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.slim.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
+          },
+
+
+5e9debf7
+
+
+http://json2ts.com/
+
+
+https://github.com/SMRTechical/movies-app.git
