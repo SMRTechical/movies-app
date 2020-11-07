@@ -12,24 +12,29 @@ import { OmdbService } from '../services/omdbService';
 export class MovieList implements OnInit {
     constructor(public data: OmdbService, public router: Router) {
         this.movieList = data.movieList;
+        this.params = data.selectedParams;
     }
 
     public movieList: SearchNS.MovieList[] = [];
     public movie: MovieNS.Movie = new MovieNS.Movie;
     public params: SearchNS.Params = new SearchNS.Params();
 
-    public currentPage1 = 1
     ngOnInit(): void {
-        this.data.loadMovies()
-            .subscribe(success => {
-                if (success) {
-                    this.movieList = this.data.movieList;
-                }
-            })
+        if (this.params.movieName == undefined) {
+            this.data.loadMovies()
+                .subscribe(success => {
+                    if (success) {
+                        this.movieList = this.data.movieList;
+                    }
+                })
+        }
+        else {
+            this.onSearch();
+        }
     };
 
-    counter(i: number) {
-        return new Array(i);
+    getPages(currentPageSet: number) {
+        return this.data.getPagesStartingFrom();
     }
 
     onSearch() {
@@ -58,5 +63,27 @@ export class MovieList implements OnInit {
                     this.router.navigate(["selected"]);
                 }
             })
+    }
+
+    isPageActive(page: number) {
+        return { 'page-item': true, 'active': this.data.currentPage == page }
+    }
+
+    isNextDisabled() {
+        return { 'page-item': true, 'disabled': this.data.isLastPageSet() };
+    }
+
+    isPreviousDisabled() {
+        return { 'page-item': true, 'disabled': this.data.isFirstPageSet() };
+    }
+
+    getNext() {
+        this.data.getNextPageSet();
+        this.onPageChange(this.data.startFrom)
+    }
+
+    getPrevious() {
+        this.data.getPreviousPageSet();
+        this.onPageChange(this.data.startFrom)
     }
 }

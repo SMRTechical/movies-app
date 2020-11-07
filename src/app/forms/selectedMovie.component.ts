@@ -21,4 +21,8 @@ export class SelectedMovie implements OnInit {
     onHome() {
         this.router.navigate([""]);
     }
+
+    onBack(){
+        this.router.navigate([""]);
+    }
 }

@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col">
-        <div class="card mb-3" style="">
+        <div class="card mb-3">
             <div class="row no-gutters">
-                <div class="col-md-4">
+                <div class="col-md-4 pt-125">
                     <div [ngSwitch]="movie.Poster === 'N/A' || movie.Poster !== 'N/A'">
                         <img class="img-responsive" *ngSwitchCase="movie.Poster !== 'N/A'" src="{{movie.Poster}}" class="card-img" [alt]="movie.Title">
                         <img class="img-responsive" *ngSwitchCase="movie.Poster === 'N/A'" class="card-img" alt="[movie.Title]" src="http://www.novelupdates.com/img/noimagefound.jpg">
@@ -10,7 +10,12 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">{{movie.Title}}</h5>
+                        <div class="card-header movie-header">
+                            <h5 class="card-title inline">{{movie.Title}}</h5>
+                            <a href="#" class="float-right" (click)="onBack()">
+                                <span>...Search</span>
+                            </a>
+                        </div>
                         <p class="card-text">{{movie.Plot}}</p>
                         <p class="card-text"><small class="text-muted"><strong class="mr-1">Released:</strong>{{movie.Released}}</small></p>
                         <p class="card-text"><small class="text-muted"><strong class="mr-1">Awards:</strong>{{movie.Awards}}</small></p>
