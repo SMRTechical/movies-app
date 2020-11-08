@@ -28,6 +28,9 @@ export class MovieList implements OnInit {
                     }
                 })
         }
+        else if (this.data.currentPage > 0){
+            this.onPageChange(this.data.currentPage);
+        }
         else {
             this.onSearch();
         }

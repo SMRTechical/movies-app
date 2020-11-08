@@ -25,6 +25,16 @@ export class OmdbService {
     public startFrom: number = 1;
     public api: string = "http://www.omdbapi.com/?apikey=5e9debf7";
 
+    initializePaging() {
+        this.totalPages = 0;
+        this.totalPageSets = 0;
+        this.currentPageSet = 0;
+        this.currentPage = 0;
+        this.currentPageSetMinPage = 0;
+        this.currentPageSetMaxPage = 0;
+        this.startFrom = 1;
+    }
+
     loadMovies(): Observable<boolean> {
         this.initialising = true;
         return this.http.get(this.api + "&s=action&y=2020&plot=full")
@@ -46,6 +56,7 @@ export class OmdbService {
     searchOmdb(params: SearchNS.Params): Observable<boolean> {
         this.loading = true;
         this.selectedParams = params;
+        this.initializePaging();
         return this.http.get(this.api + "&s=" + this.selectedParams.movieName)
             .pipe(
                 map((data: any) => {
