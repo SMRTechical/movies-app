@@ -2,13 +2,13 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
 import { map } from "rxjs/operators";
+import{ AppSettings } from '../shared/appSettings';
 import * as MovieNS from "../models/movie";
 import * as SearchNS from "../models/search";
 @Injectable()
 export class OmdbService {
     constructor(private http: HttpClient) {
     }
-
     public loading: boolean = false;
     public initialising: boolean = false;
     public selectedParams: SearchNS.Params = new SearchNS.Params();
@@ -23,7 +23,7 @@ export class OmdbService {
     public currentPageSetMinPage: number = 0;
     public currentPageSetMaxPage: number = 0;
     public startFrom: number = 1;
-    public api: string = "http://www.omdbapi.com/?apikey=5e9debf7";
+   
 
     initializePaging() {
         this.totalPages = 0;
@@ -37,7 +37,7 @@ export class OmdbService {
 
     loadMovies(): Observable<boolean> {
         this.initialising = true;
-        return this.http.get(this.api + "&s=action&y=2020&plot=full")
+        return this.http.get(AppSettings.api + "&s=action&y=2020&plot=full")
             .pipe(
                 map((data: any) => {
                     this.initialising = false;
@@ -57,7 +57,7 @@ export class OmdbService {
         this.loading = true;
         this.selectedParams = params;
         this.initializePaging();
-        return this.http.get(this.api + "&s=" + this.selectedParams.movieName)
+        return this.http.get(AppSettings.api + "&s=" + this.selectedParams.movieName)
             .pipe(
                 map((data: any) => {
                     return this.apiResponse(data);
@@ -68,7 +68,7 @@ export class OmdbService {
     pagingOmdb(params: SearchNS.Params, page: number): Observable<boolean> {
         this.loading = true;
         this.selectedParams = params;
-        return this.http.get(this.api + "&s=" + this.selectedParams.movieName + "&page=" + page)
+        return this.http.get(AppSettings.api + "&s=" + this.selectedParams.movieName + "&page=" + page)
             .pipe(
                 map((data: any) => {
                     this.currentPage = page;
@@ -79,7 +79,7 @@ export class OmdbService {
 
     getMovie(params: SearchNS.Params): Observable<boolean> {
         this.loading = true;
-        return this.http.get(this.api + "&i=" + params.imdbID)
+        return this.http.get(AppSettings.api + "&i=" + params.imdbID)
             .pipe(
                 map((data: MovieNS.Movie) => {
                     this.loading = false;
@@ -90,18 +90,19 @@ export class OmdbService {
     }
 
     getTotalPages(totalItems: number): number {
-        var items: number;
-        items = Math.ceil(Number(totalItems) / 10);
-        return items
+        var pageCount: number;
+        pageCount = Math.ceil(Number(totalItems) / AppSettings.videosPerPage);
+        return pageCount
     }
     getTotalPageSets(): number {
         var items: number;
-        items = Math.ceil(Number(this.totalPages) / 10);
+        items = Math.ceil(Number(this.totalPages) / AppSettings.maxPagesPerPage);
         return items
     }
 
     getPagesPerPage(): number {
-        return this.totalPages / this.totalPageSets
+        //return this.totalPages / this.totalPageSets
+        return AppSettings.maxPagesPerPage
     }
 
     getPages(): number[] {
@@ -126,7 +127,7 @@ export class OmdbService {
         if (this.currentPageSet > 1) {
             this.currentPageSet--
         }
-        this.startFrom = this.currentPageSetMinPage - 10;
+        this.startFrom = this.currentPageSetMinPage - AppSettings.maxPagesPerPage;
     }
 
     isLastPageSet(): boolean {

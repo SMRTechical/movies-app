@@ -27,9 +27,10 @@
                         <p class="card-text"><small class="text-muted"><strong class="mr-1">Genre:</strong>{{movie.Genre}}</small></p>
                         <p class="card-text"><small class="text-muted"><strong class="mr-1">Language:</strong>{{movie.Language}}</small></p>
                         <p class="card-text"><small class="text-muted"><strong class="mr-1">Released:</strong>{{movie.Released}}</small></p>
-                        <div *ngIf="movie.Ratings.length > 0">
-                            <ul *ngFor="let r of movie.Ratings">
-                                <li><small class="text-muted"><strong class="mr-1">{{r.Source}}:</strong>{{r.Value}}</small></li>
+                        <div *ngIf="movie && movie.Ratings && movie.Ratings.length > 0">
+                            <p class="card-text"><small class="text-muted"><strong class="mr-1">Ratings:</strong></small></p>
+                            <ul>
+                                <li *ngFor="let r of movie.Ratings"><small class="text-muted"><strong class="mr-1">{{r.Source}}:</strong>{{r.Value}}</small></li>
                             </ul>
                         </div>
                     </div>
