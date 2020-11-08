@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
 import { map } from "rxjs/operators";
-import{ AppSettings } from '../shared/appSettings';
+import { AppSettings } from '../shared/appSettings';
 import * as MovieNS from "../models/movie";
 import * as SearchNS from "../models/search";
 @Injectable()
@@ -23,7 +23,7 @@ export class OmdbService {
     public currentPageSetMinPage: number = 0;
     public currentPageSetMaxPage: number = 0;
     public startFrom: number = 1;
-   
+
 
     initializePaging() {
         this.totalPages = 0;
@@ -88,29 +88,38 @@ export class OmdbService {
                 })
             )
     }
-
+    /*
+    totalItems: videos returned
+    videosPerPage:10
+    math.ceil(393/10) = 40
+    */
     getTotalPages(totalItems: number): number {
+        console.log('totalItems', totalItems);
         var pageCount: number;
         pageCount = Math.ceil(Number(totalItems) / AppSettings.videosPerPage);
         return pageCount
     }
+
+    /*
+    maxPagesPerPage:5
+    40/5 = 8
+    */
     getTotalPageSets(): number {
         var items: number;
         items = Math.ceil(Number(this.totalPages) / AppSettings.maxPagesPerPage);
         return items
     }
 
-    getPagesPerPage(): number {
-        //return this.totalPages / this.totalPageSets
-        return AppSettings.maxPagesPerPage
-    }
-
-    getPages(): number[] {
-        return [...Array(this.getPagesPerPage()).keys()];
-    }
-
     getPagesStartingFrom(): number[] {
-        let pages = [...Array(this.getPagesPerPage()).keys()].map(i => i + this.startFrom);
+        let pages: number[];
+        if (this.currentPageSet * AppSettings.maxPagesPerPage > this.totalPages) {
+            let emptyPages: number = (this.currentPageSet * AppSettings.maxPagesPerPage) - this.totalPages;
+            let nonEmptyPages: number = AppSettings.maxPagesPerPage - emptyPages
+            pages = [...Array(nonEmptyPages).keys()].map(i => i + this.startFrom);
+        }
+        else {
+            pages = [...Array(AppSettings.maxPagesPerPage).keys()].map(i => i + this.startFrom);
+        }
         this.currentPageSetMinPage = Math.min(...pages);
         this.currentPageSetMaxPage = Math.max(...pages);
         return pages;

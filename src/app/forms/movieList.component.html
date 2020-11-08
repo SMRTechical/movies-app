@@ -75,9 +75,9 @@
 <div class="row" *ngIf="!data.error && movieList.length > 0">
     <div class="col-md-6 offset-md-3">
         <ul *ngIf="data.totalPages > 1" class="pagination pagination-md justify-content-center flex-wrap" style="margin:20px 0;cursor:pointer">
-            <li [ngClass]="isPreviousDisabled()"><a class="page-link" (click)="getPrevious()">Previous</a></li>
+            <li [ngClass]="isPreviousDisabled()"><a class="page-link" (click)="getPrevious()">&laquo;</a></li>
             <li *ngFor='let i of getPages()' [ngClass]="isPageActive(i)"><button class="page-link" (click)="onPageChange(i)">{{i}}</button></li>
-            <li [ngClass]="isNextDisabled()"><a class="page-link" (click)="getNext()">Next</a></li>
+            <li [ngClass]="isNextDisabled()"><a class="page-link" (click)="getNext()">&raquo;</a></li>
         </ul>
     </div>
 </div>
