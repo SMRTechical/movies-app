@@ -6,7 +6,7 @@ browser to directory cmd
 ng new footbal-app --dryRun --skip-git --inline-template --inline-style 
 ng new footbal-app --skip-git --inline-template --inline-style
 browser to directory cmd 
-ng server
+ng serve
 npm install bootstrap
 npm install jquery
 
