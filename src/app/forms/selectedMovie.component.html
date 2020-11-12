@@ -16,22 +16,89 @@
                                 <span>...Search</span>
                             </a>
                         </div>
-                        <p class="card-text">{{movie.Plot}}</p>
-                        <p class="card-text"><small class="text-muted"><strong class="mr-1">Released:</strong>{{movie.Released}}</small></p>
-                        <p class="card-text"><small class="text-muted"><strong class="mr-1">Awards:</strong>{{movie.Awards}}</small></p>
-                        <p class="card-text"><small class="text-muted"><strong class="mr-1">Production:</strong>{{movie.Production}}</small></p>
-                        <p class="card-text"><small class="text-muted"><strong class="mr-1">Actors:</strong>{{movie.Actors}}</small></p>
-                        <p class="card-text"><small class="text-muted"><strong class="mr-1">Country:</strong>{{movie.Country}}</small></p>
-                        <p class="card-text"><small class="text-muted"><strong class="mr-1">Director:</strong>{{movie.Director}}</small></p>
-                        <p class="card-text"><small class="text-muted"><strong class="mr-1">Writer:</strong>{{movie.Writer}}</small></p>
-                        <p class="card-text"><small class="text-muted"><strong class="mr-1">Genre:</strong>{{movie.Genre}}</small></p>
-                        <p class="card-text"><small class="text-muted"><strong class="mr-1">Language:</strong>{{movie.Language}}</small></p>
-                        <p class="card-text"><small class="text-muted"><strong class="mr-1">Released:</strong>{{movie.Released}}</small></p>
-                        <div *ngIf="movie && movie.Ratings && movie.Ratings.length > 0">
-                            <p class="card-text"><small class="text-muted"><strong class="mr-1">Ratings:</strong></small></p>
-                            <ul>
-                                <li *ngFor="let r of movie.Ratings"><small class="text-muted"><strong class="mr-1">{{r.Source}}:</strong>{{r.Value}}</small></li>
-                            </ul>
+                        <p class="card-text mt-1 mb-1"><strong>{{movie.Plot}}</strong></p>
+                        <dl class="row movie-details">
+                            <dt class="col-sm-3">Released:</dt>
+                            <dd class="col-sm-9">{{movie.Released}}</dd>
+                            <dt class="col-sm-3">Awards:</dt>
+                            <dd class="col-sm-9">{{movie.Awards}}</dd>
+                            <dt class="col-sm-3">Production:</dt>
+                            <dd class="col-sm-9">{{movie.Production}}</dd>
+                            <dt class="col-sm-3">Actors:</dt>
+                            <dd class="col-sm-9">{{movie.Actors}}</dd>
+                            <dt class="col-sm-3">Country:</dt>
+                            <dd class="col-sm-9">{{movie.Country}}</dd>
+                            <dt class="col-sm-3">Director:</dt>
+                            <dd class="col-sm-9">{{movie.Director}}</dd>
+                            <dt class="col-sm-3">Writer::</dt>
+                            <dd class="col-sm-9">{{movie.Writer}}</dd>
+                            <dt class="col-sm-3">Genre:</dt>
+                            <dd class="col-sm-9">{{movie.Genre}}</dd>
+                            <dt class="col-sm-3">Language:</dt>
+                            <dd class="col-sm-9">{{movie.Language}}</dd>
+                            <dt *ngIf="movie && movie.Ratings && movie.Ratings.length > 0" class="col-sm-3">Ratings:</dt>
+                            <dd class="col-sm-9">
+                                <dl *ngFor="let r of movie.Ratings" class="row">
+                                    <dt class="col-sm-4">{{r.Source}}:</dt>
+                                    <dd class="col-sm-8">{{r.Value}}</dd>
+                                </dl>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="container text-center">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <a class="carousel-control-prev text-dark" href="#myCarousel" role="button" data-slide="prev">
+                                    <span class="fa fa-chevron-left" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next text-dark" href="#myCarousel" role="button" data-slide="next">
+                                    <span class="fa fa-chevron-right" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="myCarousel" class="carousel slide w-100" data-ride="carousel">
+                                <div class="carousel-inner" role="listbox">
+                                    <div class="carousel-item active">
+                                        <div class="row">
+                                            <div *ngFor="let m of getMovies(0,4)" class="col-md-3">
+                                                <a class="clickable" (click)="onClick(m)">
+                                                    <div [ngSwitch]="m.Poster==='N/A' || m.Poster !=='N/A' ">
+                                                        <img class="img-fluid img-thumbnail card-img card-img-top " *ngSwitchCase="m.Poster !=='N/A' " src="{{m.Poster}} ">
+                                                        <img class="img-fluid img-thumbnail card-img-top " *ngSwitchCase=" m.Poster==='N/A' " src="http://www.novelupdates.com/img/noimagefound.jpg ">
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="row">
+                                            <div *ngFor="let m of getMovies(4,8)" class="col-md-3">
+                                                <a class="clickable" (click)="onClick(m)">
+                                                    <div [ngSwitch]="m.Poster==='N/A' || m.Poster !=='N/A' ">
+                                                        <img class="img-fluid img-thumbnail card-img card-img-top " *ngSwitchCase="m.Poster !=='N/A' " src="{{m.Poster}} ">
+                                                        <img class="img-fluid img-thumbnail card-img-top " *ngSwitchCase=" m.Poster==='N/A' " src="http://www.novelupdates.com/img/noimagefound.jpg ">
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="row">
+                                            <div *ngFor="let m of getMovies(8,10)" class="col-md-3">
+                                                <a class="clickable" (click)="onClick(m)">
+                                                    <div [ngSwitch]="m.Poster==='N/A' || m.Poster !=='N/A' ">
+                                                        <img class="img-fluid img-thumbnail card-img card-img-top " *ngSwitchCase="m.Poster !=='N/A' " src="{{m.Poster}} ">
+                                                        <img class="img-fluid img-thumbnail card-img-top " *ngSwitchCase=" m.Poster==='N/A' " src="http://www.novelupdates.com/img/noimagefound.jpg ">
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

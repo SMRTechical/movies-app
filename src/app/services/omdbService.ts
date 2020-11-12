@@ -94,7 +94,6 @@ export class OmdbService {
     math.ceil(393/10) = 40
     */
     getTotalPages(totalItems: number): number {
-        console.log('totalItems', totalItems);
         var pageCount: number;
         pageCount = Math.ceil(Number(totalItems) / AppSettings.videosPerPage);
         return pageCount
